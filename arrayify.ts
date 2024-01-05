@@ -30,7 +30,7 @@ export const arrayify =
     T extends any[],
     MANY extends Exclude<keyof T[0], MAIN>,
     MAIN extends keyof T[0],
-    ONE extends Exclude<keyof T[0], MAIN>,
+    ONE extends Exclude<keyof T[0], MAIN | MANY>,
   >(obj: {
     one: { table: MAIN; id?: keyof T[0][MAIN] };
     with_many?: {
@@ -85,8 +85,8 @@ export const arrayify =
       }
     }
     return maped as Prettify<
-      (T[0][MAIN] & { [key in MANY]: Exclude<T[0][key], null>[] } & {
+      T[0][MAIN] & { [key in MANY]: Exclude<T[0][key], null>[] } & {
         [key in ONE]: Exclude<T[0][key], null>;
-      })[]
-    >;
+      }
+    >[];
   };

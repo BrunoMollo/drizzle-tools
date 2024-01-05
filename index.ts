@@ -69,7 +69,6 @@ const result = await db
     t_ingredient,
     eq(t_ingredient.id, tr_ingredient_product.ingredientId),
   )
-  .then((x) => x)
   .then(
     copy_column({
       from: "r_ingredient_product",
