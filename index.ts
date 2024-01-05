@@ -6,7 +6,7 @@ import {
   tr_ingredient_product,
   tr_supplier_product,
 } from "./schema.js";
-import { arrayify } from "./arrayify.js";
+import { arrayify, copy_column } from "./arrayify.js";
 import { eq } from "drizzle-orm";
 import { createClient } from "@libsql/client";
 import * as schema from "./schema.js";
@@ -69,16 +69,18 @@ const result = await db
     t_ingredient,
     eq(t_ingredient.id, tr_ingredient_product.ingredientId),
   )
+  .then((x) => x)
+  .then(
+    copy_column({
+      from: "r_ingredient_product",
+      field: "amount",
+      to: "ingredient",
+    }),
+  )
   .then(
     arrayify({
       one: { table: "product", id: "id" },
-      manys: [
-        {
-          table: "ingredient",
-          borrow: { from: "r_ingredient_product", field: "amount" },
-        },
-        { table: "supplier" },
-      ],
+      manys: [{ table: "ingredient" }, { table: "supplier" }],
     }),
   );
 
