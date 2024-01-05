@@ -57,7 +57,7 @@ export const tr_ingredient_product = sqliteTable(
 // SUPPLIER
 export const t_supplier = sqliteTable("supplier", {
   id: integer("id").notNull().primaryKey({ autoIncrement: true }),
-  name: text("name").notNull(),
+  fullname: text("name").notNull(),
 });
 //-------------------------------------------------------------------------------------////
 //
