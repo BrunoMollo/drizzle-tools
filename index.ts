@@ -40,14 +40,14 @@ await db
 
 await db
   .insert(tr_ingredient_product)
-  .values({ ingredientId: 3, productId: 2, amount: 1000 });
+  .values({ ingredientId: 3, productId: 2, amount: 3000 });
 
 await db.insert(tr_supplier_product).values({ supplierId: 1, productId: 2 });
 
 await db.insert(t_product).values({ id: 3, name: "Product 3" });
 await db
   .insert(tr_ingredient_product)
-  .values({ ingredientId: 1, productId: 3, amount: 1000 });
+  .values({ ingredientId: 1, productId: 3, amount: 4000 });
 
 await db.insert(tr_supplier_product).values({ supplierId: 1, productId: 3 });
 await db.insert(tr_supplier_product).values({ supplierId: 2, productId: 3 });
@@ -72,7 +72,13 @@ const result = await db
   .then(
     arrayify({
       one: { table: "product", id: "id" },
-      manys: [{ table: "ingredient" }, { table: "supplier" }],
+      manys: [
+        {
+          table: "ingredient",
+          borrow: { from: "r_ingredient_product", field: "amount" },
+        },
+        { table: "supplier" },
+      ],
     }),
   );
 

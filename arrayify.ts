@@ -5,7 +5,11 @@ export type Prettify<T> = {
 export const arrayify =
   <T extends any[], M extends keyof T[0], O extends keyof T[0]>(obj: {
     one: { table: O; id: keyof T[0][O] };
-    manys: { table: M; id?: string }[];
+    manys: {
+      table: M;
+      id?: string;
+      borrow?: { from: keyof T[0]; field: string };
+    }[];
   }) =>
   (resulset: T) => {
     const { one, manys } = obj;
@@ -19,9 +23,15 @@ export const arrayify =
 
       for (let m of manys) {
         const seen = new Map();
+
         row_one[m.table] = resulset
           .filter((x) => x[one.table][one.id] === id)
-          .map((x) => x[m.table])
+          .map((x) => {
+            if (m.borrow && x[m.borrow.from]) {
+              x[m.table][m.borrow.field] = x[m.borrow.from][m.borrow.field];
+            }
+            return x[m.table];
+          })
           .filter((x) => {
             if (!x) return false;
 
