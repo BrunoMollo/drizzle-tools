@@ -80,7 +80,7 @@ const result = await db
   .then(
     arrayify({
       one: { table: "product", id: "id" },
-      manys: [{ table: "ingredient" }, { table: "supplier" }],
+      many: [{ table: "ingredient" }, { table: "supplier" }],
     }),
   );
 
