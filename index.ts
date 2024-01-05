@@ -79,7 +79,7 @@ const result = await db
   )
   .then(
     arrayify({
-      one: { table: "product", id: "id" },
+      one: { table: "product" },
       many: [{ table: "ingredient" }, { table: "supplier" }],
     }),
   );

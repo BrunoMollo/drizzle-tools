@@ -31,7 +31,7 @@ export const arrayify =
     M extends Exclude<keyof T[0], O>,
     O extends keyof T[0],
   >(obj: {
-    one: { table: O; id: keyof T[0][O] };
+    one: { table: O; id?: keyof T[0][O] };
     many: {
       table: M;
       id?: string;
@@ -40,6 +40,9 @@ export const arrayify =
   }) =>
   (resulset: T) => {
     const { one, many } = obj;
+    if (!one.id) {
+      one.id = "id";
+    }
     const indetifiers = [...new Set(resulset.map((x) => x[one.table][one.id]))];
 
     const maped = [];
