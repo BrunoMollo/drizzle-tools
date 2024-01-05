@@ -28,18 +28,21 @@ export function copy_column<
 export const arrayify =
   <
     T extends any[],
-    M extends Exclude<keyof T[0], O>,
-    O extends keyof T[0],
+    MANY extends Exclude<keyof T[0], MAIN>,
+    MAIN extends keyof T[0],
+    ONE extends Exclude<keyof T[0], MAIN>,
   >(obj: {
-    one: { table: O; id?: keyof T[0][O] };
-    many: {
-      table: M;
+    one: { table: MAIN; id?: keyof T[0][MAIN] };
+    with_many?: {
+      table: MANY;
       id?: string;
-      borrow?: { from: keyof T[0]; field: string };
+    }[];
+    with_one?: {
+      table: ONE;
     }[];
   }) =>
   (resulset: T) => {
-    const { one, many } = obj;
+    const { one, with_many, with_one } = obj;
     if (!one.id) {
       one.id = "id";
     }
@@ -51,15 +54,18 @@ export const arrayify =
         .map((x) => x[one.table])
         .find((x) => x[one.id] === id);
 
-      for (let m of many) {
+      for (let o of with_one ?? []) {
+        row_one[o.table] = resulset
+          .filter((x) => x[one.table][one.id] === id)
+          .map((x) => x[o.table])[0];
+      }
+
+      for (let m of with_many ?? []) {
         const seen = new Map();
 
         row_one[m.table] = resulset
           .filter((x) => x[one.table][one.id] === id)
           .map((x) => {
-            if (m.borrow && x[m.borrow.from]) {
-              x[m.table][m.borrow.field] = x[m.borrow.from][m.borrow.field];
-            }
             return x[m.table];
           })
           .filter((x) => {
@@ -79,6 +85,8 @@ export const arrayify =
       }
     }
     return maped as Prettify<
-      T[0][O] & { [key in M]: Exclude<T[0][key], null>[] }
+      (T[0][MAIN] & { [key in MANY]: Exclude<T[0][key], null>[] } & {
+        [key in ONE]: Exclude<T[0][key], null>;
+      })[]
     >;
   };
