@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "tsx index.ts",
     "test": "drizzle-kit generate:sqlite & vitest",
     "db-push": "drizzle-kit push:sqlite"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "BrunoMollo",
+  "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "tsx": "^4.7.0",
