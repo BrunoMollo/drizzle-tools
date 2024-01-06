@@ -1,6 +1,6 @@
 {
-  "name": "drizzle-array",
-  "version": "1.0.0",
+  "name": "drizzle-tools",
+  "version": "beta-1.0.0",
   "description": "",
   "type": "module",
   "main": "index.js",
@@ -13,13 +13,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@libsql/client": "0.4.0-pre.7",
-    "drizzle-orm": "^0.29.3",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.7.0",
-    "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "@libsql/client": "0.4.0-pre.7",
+    "drizzle-orm": "^0.29.3",
     "@types/better-sqlite3": "^7.6.8",
     "better-sqlite3": "^9.2.2",
     "drizzle-kit": "^0.20.9",
