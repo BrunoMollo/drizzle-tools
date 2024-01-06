@@ -1,6 +1,6 @@
 {
   "name": "drizzle-tools",
-  "version": "beta-1.0.0",
+  "version": "0.0.0",
   "description": "",
   "type": "module",
   "main": "index.js",
@@ -12,8 +12,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "tsx": "^4.7.0",
     "typescript": "^5.3.3",
