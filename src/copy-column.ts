@@ -1,4 +1,4 @@
-import { Prettify } from "./prettify";
+import type { Prettify } from "./prettify";
 
 export function copy_column<
   T extends any[],
