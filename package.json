@@ -1,11 +1,24 @@
 {
   "name": "drizzle-array",
-  "module": "index.ts",
+  "version": "1.0.0",
+  "description": "",
   "type": "module",
-  "devDependencies": {
-    "bun-types": "latest"
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db-push": "drizzle-kit push:sqlite"
   },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@libsql/client": "0.4.0-pre.7",
+    "drizzle-orm": "^0.29.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.20.9"
   }
 }
