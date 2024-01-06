@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "drizzle-kit generate:sqlite & vitest",
     "db-push": "drizzle-kit push:sqlite"
   },
   "keywords": [],
@@ -20,6 +20,9 @@
     "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.20.9"
+    "@types/better-sqlite3": "^7.6.8",
+    "better-sqlite3": "^9.2.2",
+    "drizzle-kit": "^0.20.9",
+    "vitest": "^1.1.3"
   }
 }

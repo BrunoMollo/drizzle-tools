@@ -6,7 +6,7 @@ import {
   tr_ingredient_product,
   tr_supplier_product,
 } from "./schema.js";
-import { arrayify, copy_column } from "./arrayify.js";
+import { drizzle_map, copy_column } from "./arrayify.js";
 import { eq } from "drizzle-orm";
 import { createClient } from "@libsql/client";
 import * as schema from "./schema.js";
@@ -77,7 +77,7 @@ const result = await db
     }),
   )
   .then(
-    arrayify({
+    drizzle_map({
       one: { table: "product" },
       with_many: [{ table: "supplier" }],
       with_one: [{ table: "ingredient" }],
