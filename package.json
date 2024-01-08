@@ -1,16 +1,27 @@
 {
   "name": "drizzle-tools",
-  "version": "0.0.2",
-  "description": "",
   "type": "module",
+  "version": "0.0.2",
+  "author": "BrunoMollo <dia.mollo.bruno@gmail.com>",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BrunoMollo/drizzle-tools"
+  },
+  "bugs": {
+    "url": "https://github.com/BrunoMollo/drizzle-tools/issues"
+  },
   "main": "src/index.js",
   "scripts": {
     "dev": "tsx index.ts",
     "test": "drizzle-kit generate:sqlite & vitest",
     "db-push": "drizzle-kit push:sqlite"
   },
-  "keywords": [],
-  "author": "BrunoMollo",
+  "keywords": [
+    "drizzle-orm",
+    "mapping",
+    "map"
+  ],
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
@@ -22,5 +33,8 @@
     "better-sqlite3": "^9.2.2",
     "drizzle-kit": "^0.20.9",
     "vitest": "^1.1.3"
-  }
+  },
+  "files": [
+    "./src/**"
+  ]
 }
