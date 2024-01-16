@@ -1,10 +1,15 @@
 import { beforeAll, describe, expect, test } from "vitest";
 
 import { db, delete_all, seed } from "./seed-db";
-import { t_product, t_supplier, tr_supplier_product } from "./schema";
+import {
+  t_category,
+  t_product,
+  t_supplier,
+  tr_supplier_product,
+} from "./schema";
 import { eq } from "drizzle-orm";
 import { drizzle_map } from "../src/drizzle-map";
-import { pick_columns } from "../src/pick-columns";
+import { pick_columns, pick_merge } from "../src/pick-columns";
 
 describe("index", () => {
   beforeAll(async () => {
@@ -108,6 +113,43 @@ describe("index", () => {
       expect(p3?.supplier.id).toBe(1);
       //@ts-ignore
       expect(p3?.supplier.fullname).toBe(undefined);
+    }
+  });
+
+  test("pick_merge", async () => {
+    const res = await db
+      .select(
+        pick_merge()
+          .table(t_product, "id", "name")
+          .alised(t_category, "name", "category")
+          .build(),
+      )
+      .from(t_product)
+      .leftJoin(t_category, eq(t_product.category_id, t_category.id));
+
+    expect(res.length).toBe(3);
+    {
+      const id = 1;
+      const p = res.find((x) => x.id == id);
+      expect(p?.id).toBe(id);
+      expect(p?.name).toBe("Product 1");
+      expect(p?.category).toBe("Category 1");
+    }
+
+    {
+      const id = 2;
+      const p = res.find((x) => x.id == id);
+      expect(p?.id).toBe(id);
+      expect(p?.name).toBe("Product 2");
+      expect(p?.category).toBe(null);
+    }
+
+    {
+      const id = 3;
+      const p = res.find((x) => x.id == id);
+      expect(p?.id).toBe(id);
+      expect(p?.name).toBe("Product 3");
+      expect(p?.category).toBe(null);
     }
   });
 });

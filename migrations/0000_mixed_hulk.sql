@@ -1,3 +1,8 @@
+CREATE TABLE `category` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`name` text NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE `ingredient` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`name` text NOT NULL
@@ -5,7 +10,9 @@ CREATE TABLE `ingredient` (
 --> statement-breakpoint
 CREATE TABLE `product` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-	`name` text NOT NULL
+	`name` text NOT NULL,
+	`category_id` integer,
+	FOREIGN KEY (`category_id`) REFERENCES `category`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `supplier` (

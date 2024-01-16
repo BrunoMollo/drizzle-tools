@@ -1,4 +1,5 @@
 import {
+  t_category,
   t_ingredient,
   t_product,
   t_supplier,
@@ -24,9 +25,13 @@ export async function delete_all() {
   await db.delete(t_ingredient);
   await db.delete(t_product);
   await db.delete(t_supplier);
+  await db.delete(t_supplier);
 }
 
 export async function seed() {
+  // category
+  await db.insert(t_category).values({ id: 1, name: "Category 1" });
+
   // Ingredients
   await db.insert(t_ingredient).values({ id: 1, name: "Ingredient 1" });
   await db.insert(t_ingredient).values({ id: 2, name: "Ingredient 2" });
@@ -37,7 +42,9 @@ export async function seed() {
   await db.insert(t_supplier).values({ id: 2, fullname: "Supplier 2" });
 
   //Product 1 -> 0 Suppliers & 0 Ingredients
-  await db.insert(t_product).values({ id: 1, name: "Product 1" });
+  await db
+    .insert(t_product)
+    .values({ id: 1, name: "Product 1", category_id: 1 });
 
   //Product 2 -> 1 Suppliers & 2 Ingredients
   await db.insert(t_product).values({ id: 2, name: "Product 2" });

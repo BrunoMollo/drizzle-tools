@@ -29,6 +29,16 @@ export const tr_ingredient_ingredient = sqliteTable("r_ingredient_ingredient", {
 export const t_product = sqliteTable("product", {
   id: integer("id").notNull().primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
+  category_id: integer("category_id").references(() => t_category.id),
+});
+//-------------------------------------------------------------------------------------////
+//
+
+////-------------------------------------------------------------------------------------//
+// CATEGORY
+export const t_category = sqliteTable("category", {
+  id: integer("id").notNull().primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
 });
 //-------------------------------------------------------------------------------------////
 //
