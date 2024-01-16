@@ -121,7 +121,7 @@ describe("index", () => {
       .select(
         pick_merge()
           .table(t_product, "id", "name")
-          .alised(t_category, "name", "category")
+          .aliased(t_category, "name", "category")
           .build(),
       )
       .from(t_product)

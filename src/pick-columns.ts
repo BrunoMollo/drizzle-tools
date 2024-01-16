@@ -26,7 +26,7 @@ export function pick_merge<R>(map: Map<any, any> = new Map()) {
       return pick_merge<R & { [k in C]: T[k] }>(map);
     },
 
-    alised: <T extends Object, C extends keyof T, A extends string>(
+    aliased: <T extends Object, C extends keyof T, A extends string>(
       table: T,
       col: C,
       as: A,
