@@ -19,8 +19,8 @@ describe("index", () => {
   test("one product with many suppliers (left join)", async () => {
     const res = await db
       .select({
-        product: pick_columns(t_product, ["id", "name"]),
-        suppliers: pick_columns(t_supplier, ["id", "fullname"]),
+        product: pick_columns(t_product, "id", "name"),
+        suppliers: pick_columns(t_supplier, "id", "fullname"),
       })
       .from(t_product)
       .leftJoin(
@@ -69,8 +69,8 @@ describe("index", () => {
   test("one product with one suppliers (with no fullname) (left join)", async () => {
     const res = await db
       .select({
-        product: pick_columns(t_product, ["id", "name"]),
-        supplier: pick_columns(t_supplier, ["id"]),
+        product: pick_columns(t_product, "id", "name"),
+        supplier: pick_columns(t_supplier, "id", "fullname"),
       })
       .from(t_product)
       .leftJoin(

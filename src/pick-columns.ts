@@ -1,6 +1,11 @@
-export function pick_columns<T extends Object, C extends keyof T>(
+type Columns<T extends Object> = Exclude<
+  keyof T,
+  "_" | "$inferSelect" | "$inferInsert" | "getSQL"
+>;
+
+export function pick_columns<T extends Object, C extends Columns<T>>(
   table: T,
-  columns: (C | { col: C; as: string })[],
+  ...columns: (C | { col: C; as: string })[]
 ) {
   const map = new Map();
   for (let c of columns) {
