@@ -1,7 +1,7 @@
 {
   "name": "drizzle-tools",
   "type": "module",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "BrunoMollo <dia.mollo.bruno@gmail.com>",
   "description": "",
   "repository": {
