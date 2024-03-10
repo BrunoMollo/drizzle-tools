@@ -4,8 +4,8 @@ export const drizzle_map =
   <
     T extends any[],
     MAIN extends keyof T[0],
-    MANY extends Exclude<keyof T[0], MAIN | ONE>,
-    ONE extends Exclude<keyof T[0], MAIN | MANY>,
+    MANY extends keyof T[0],
+    ONE extends keyof T[0],
   >(data: {
     one: MAIN;
     with_many: MANY[];
